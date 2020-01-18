@@ -19,6 +19,7 @@ public class MyAccountFragment extends Fragment {
     public MyAccountFragment() {
         // Required empty public constructor
     }
+    public static final int MANAGE_ADDRESS=1;
 
 
     @Override

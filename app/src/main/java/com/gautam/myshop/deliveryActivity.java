@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ public class deliveryActivity extends AppCompatActivity {
 
     private RecyclerView deliveryRecyclerView;
     private Button changeOraddNewAddressButton;
+    public static final int SELECT_ADDRESS=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,16 @@ public class deliveryActivity extends AppCompatActivity {
 
 
         changeOraddNewAddressButton.setVisibility(View.VISIBLE);
+        changeOraddNewAddressButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent myAddressesIntent = new Intent(deliveryActivity.this,alladressesactivity.class);
+
+                myAddressesIntent.putExtra("MODE",SELECT_ADDRESS);
+                startActivity(myAddressesIntent);
+            }
+        });
 
     }
 

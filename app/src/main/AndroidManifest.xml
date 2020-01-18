@@ -20,6 +20,8 @@
         <activity android:name=".ViewAllActivity" />
         <activity android:name=".ProductDetailsActivity" />
         <activity android:name=".CategoryActivity" />
+        <activity android:name=".adressactivity" />
+        <activity android:name=".alladressesactivity" />
         <activity android:name=".AdminAddNewProductActivity" />
         <activity
             android:name=".LoginActivity"

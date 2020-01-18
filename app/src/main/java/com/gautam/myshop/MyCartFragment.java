@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,8 +63,11 @@ public class MyCartFragment extends Fragment {
         continueButton.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
-                Intent deliveryIntent = new Intent(getContext(),deliveryActivity.class);
+
+                Toast.makeText(getContext(),"samrth cutiya ",Toast.LENGTH_LONG).show();
+                Intent deliveryIntent = new Intent(getContext(),adressactivity.class);
                 getContext().startActivity(deliveryIntent);
+
             }
         });
 
