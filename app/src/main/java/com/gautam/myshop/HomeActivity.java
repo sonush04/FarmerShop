@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     public static boolean showChart = false;
 
-    private int currentFragment = -1;
+    private int currentFragment;
 
 
 
