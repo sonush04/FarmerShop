@@ -22,6 +22,8 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.gautam.myshop.HomeActivity.showChart;
+
 public class ProductDetailsActivity extends AppCompatActivity {
     private ViewPager productIMgesViewPager;
     private TabLayout viewPagerIndicator;
@@ -183,6 +185,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         else if(id==R.id.main_cart_icon)
         {
+            Intent cartIntent = new Intent(ProductDetailsActivity.this, HomeActivity.class);
+            showChart = true;
+            startActivity(cartIntent);
             return true;
         }
 

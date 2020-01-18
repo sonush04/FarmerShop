@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,13 +37,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private  NavigationView navigationView;
     private ImageView actionBarLogo;
 
+    public static boolean showChart = false;
 
-    private static int currentFragment;
+    private int currentFragment = -1;
 
 
 
     private ProgressDialog loadingBar;
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -61,16 +64,26 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         frameLayout=findViewById(R.id.main_framelayout);
         setFragment(new HomeFragment(),HOME_FRAGMENT);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(HomeActivity.this,drawer,toolbar,0,0);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(HomeActivity.this);
         //navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
         navigationView.getMenu().getItem(0).setChecked(true);
         navigationView.getMenu().getItem(3).setChecked(false);
+        if(showChart){
+            drawer.setDrawerLockMode(1);
 
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+            gotoFragment("My Cart", new MyCartFragment(),-2);
+        }else{
+            ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(HomeActivity.this,drawer,toolbar,0,0);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+            setFragment(new HomeFragment(), HOME_FRAGMENT);
+        }
 
         // AdView adView=new AdView(this);
 
@@ -95,13 +108,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             if (currentFragment == HOME_FRAGMENT) {
                 super.onBackPressed();
             } else {
-                //getSupportActionBar().setDisplayShowTitleEnabled(false);
-                actionBarLogo.setVisibility(View.VISIBLE);
-                invalidateOptionsMenu();
-                setFragment(new HomeFragment(),HOME_FRAGMENT);
-                navigationView.getMenu().getItem(0).setChecked(true);
-                //navigationView.getMenu().getItem(0).setChecked(true);
-                //navigationView.getMenu().getItem(3).setChecked(false);
+                if(showChart){
+                    showChart = false;
+                    finish();
+                }else {
+                    //getSupportActionBar().setDisplayShowTitleEnabled(false);
+                    actionBarLogo.setVisibility(View.VISIBLE);
+                    invalidateOptionsMenu();
+                    setFragment(new HomeFragment(), HOME_FRAGMENT);
+                    navigationView.getMenu().getItem(0).setChecked(true);
+                    //navigationView.getMenu().getItem(0).setChecked(true);
+                    //navigationView.getMenu().getItem(3).setChecked(false);
+                }
             }
         }
     }
@@ -136,7 +154,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             myCart();
             return true;
         }
-
+        else if(id == android.R.id.home){
+            if(showChart){
+                showChart = false;
+                finish();
+                return true;
+            }
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -187,8 +211,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         else if(id==R.id.my_order)
         {
-            myOrder();
-        }
+                myOrder();
+            }
 
         else if(id==R.id.my_rewards)
         {
