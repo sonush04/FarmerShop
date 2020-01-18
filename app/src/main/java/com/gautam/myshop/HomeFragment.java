@@ -89,31 +89,15 @@ private RecyclerView categoryRecyclerView;
 
 
 
-        sliderModelList.add(new slider_model(R.drawable.my_rewards,"#077AE4"));
+
         sliderModelList.add(new slider_model(R.drawable.search,"#077AE4"));
         sliderModelList.add(new slider_model(R.drawable.app_icon,"#077AE4"));
-
-
-
-
-
-
-
         sliderModelList.add(new slider_model(R.drawable.banner,"#077AE4"));
         sliderModelList.add(new slider_model(R.drawable.profile,"#077AE4"));
         sliderModelList.add(new slider_model(R.drawable.my_order,"#077AE4"));
         sliderModelList.add(new slider_model(R.drawable.my_wishlist,"#077AE4"));
         sliderModelList.add(new slider_model(R.drawable.my_rewards,"#077AE4"));
 
-
-
-
-
-
-
-        sliderModelList.add(new slider_model(R.drawable.search,"#077AE4"));
-        sliderModelList.add(new slider_model(R.drawable.app_icon,"#077AE4"));
-        sliderModelList.add(new slider_model(R.drawable.profile,"#077AE4"));
 
 
         ////////////
