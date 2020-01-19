@@ -84,7 +84,7 @@ public class farmerCategoryActivity extends AppCompatActivity {
 
         PostsImagesRefrence = FirebaseStorage.getInstance().getReference();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Admins");
-        PostsRef = FirebaseDatabase.getInstance().getReference().child("Posts");
+        PostsRef = FirebaseDatabase.getInstance().getReference().child("Admins");
 //        UsersRef = FirebaseDatabase.getInstance().getReference().child(current_user_id);
 
         SelectPostImage =  findViewById(R.id.categoryImage);
@@ -153,8 +153,10 @@ public class farmerCategoryActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                 if (task.isSuccessful()) {
+                   // Toast.makeText(farmerCategoryActivity.this, "image uploaded successfully to Storage...", Toast.LENGTH_SHORT).show();
+
                     downloadUrl = task.getResult().getStorage().getDownloadUrl().toString();
-                    Toast.makeText(farmerCategoryActivity.this, "image uploaded successfully to Storage...", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(farmerCategoryActivity.this, "image uploaded successfully to Storage...", Toast.LENGTH_SHORT).show();
 
                     SavingPostInformationToDatabase();
 
@@ -168,65 +170,31 @@ public class farmerCategoryActivity extends AppCompatActivity {
 
 
     private void SavingPostInformationToDatabase() {
-        PostsRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    countPosts = dataSnapshot.getChildrenCount();
-
-                } else {
-                    countPosts = 0;
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        UsersRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if (dataSnapshot.exists()) {
-                    final String userFullName = dataSnapshot.child("fullname").getValue().toString();
-                    final String userProfileImage = dataSnapshot.child("profileimage").getValue().toString();
 
 
-                    HashMap postsMap = new HashMap();
-                    postsMap.put("uid", current_user_id);
-                    postsMap.put("date", saveCurrentDate);
-                    postsMap.put("time", saveCurrentTime);
-                    postsMap.put("description", Description);
-                    postsMap.put("postimage", downloadUrl);
-                    postsMap.put("profileimage", userProfileImage);
-                    postsMap.put("fullname", userFullName);
-                    postsMap.put("counter", countPosts);
-                    PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
-                            .addOnCompleteListener(new OnCompleteListener() {
-                                @Override
-                                public void onComplete(@NonNull Task task) {
-                                    if (task.isSuccessful()) {
-                                        SendUserToMainActivity();
-                                        Toast.makeText(farmerCategoryActivity.this, "New Post is updated successfully.", Toast.LENGTH_SHORT).show();
-                                        loadingBar.dismiss();
-                                    } else {
-                                        Toast.makeText(farmerCategoryActivity.this, "Error Occured while updating your post.", Toast.LENGTH_SHORT).show();
-                                        loadingBar.dismiss();
-                                    }
-                                }
-                            });
+        HashMap postsMap = new HashMap();
+        //postsMap.put("uid", current_user_id);
+        postsMap.put("date", saveCurrentDate);
+        postsMap.put("time", saveCurrentTime);
+        postsMap.put("title", Description);
+        // postsMap.put("profileimage", userProfileImage);
+        // postsMap.put("fullname", userFullName);
+        //postsMap.put("title", );
+        PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
+                .addOnCompleteListener(new OnCompleteListener() {
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if (task.isSuccessful()) {
+                            SendUserToMainActivity();
+                            Toast.makeText(farmerCategoryActivity.this, "New Post is updated successfully.", Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
+                        } else {
+                            Toast.makeText(farmerCategoryActivity.this, "Error Occured while updating your post.", Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
+                        }
+                    }
+                });
 
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
 
