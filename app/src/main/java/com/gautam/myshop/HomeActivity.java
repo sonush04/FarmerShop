@@ -10,12 +10,15 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -25,6 +28,9 @@ import io.paperdb.Paper;
 
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    public Dialog dialog;
+    public Button dialogyes,dialogno;
 
     private AppBarConfiguration mAppBarConfiguration;
     private FrameLayout frameLayout;
@@ -50,11 +56,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
 
 
-
-
-
-
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,6 +70,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setFragment(new HomeFragment(),HOME_FRAGMENT);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
+       // createDialog();
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(HomeActivity.this);
@@ -99,6 +105,40 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         // NavigationUI.setupWithNavController(navigationView, navController);
     }
+
+  /*  private void createDialog() {
+        dialog=new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+       dialog.setContentView(R.layout.dialog_exit);
+
+        dialog.setCancelable(true);
+
+        dialogyes=(Button)findViewById(R.id.yes);
+        dialogno=(Button)findViewById(R.id.no);
+
+        dialogyes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Intent.ACTION_MAIN);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                startActivity(intent);
+                finish();
+                System.exit(0);
+
+
+
+            }
+        });
+
+        dialogno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+*/
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

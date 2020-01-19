@@ -30,20 +30,20 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="80dp"
-            android:src="@drawable/sports"
+            android:src="@drawable/wheat"
             android:id="@+id/sports">
         </ImageView>
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="80dp"
-            android:src="@drawable/sweather"
+            android:src="@drawable/fruits"
             android:id="@+id/sweater">
         </ImageView>
         <ImageView
             android:layout_width="100dp"
             android:layout_height="80dp"
-            android:src="@drawable/watches"
+            android:src="@drawable/vegitable"
             android:id="@+id/watches">
         </ImageView>
 
@@ -146,6 +146,14 @@ android:layout_below="@+id/linear1_category_layout">
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/addNewCategory"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/linear4_category_layout"
+        android:layout_marginTop="58dp"
+        android:text="Add New Category" />
 
 
 </RelativeLayout>

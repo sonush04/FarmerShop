@@ -2,6 +2,8 @@ package com.gautam.myshop;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +15,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
+import static com.gautam.myshop.deliveryActivity.SELECT_ADDRESS;
+
 public class alladressesactivity extends AppCompatActivity {
+
     private RecyclerView myaddressesRecyclerView;
-    private static addresses_adapter addresses_adapter_obj;
+    private static addresses_adapter Addresses_adapter;
+
+    private Button deliverHere;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_alladressesactivity);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -29,6 +41,7 @@ public class alladressesactivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         myaddressesRecyclerView.setLayoutManager(layoutManager);
+
         List<addresses_model> addresses_modelList =new ArrayList<>();
 
         addresses_modelList.add(new addresses_model("john","sdsdvhsk","242001",true));
@@ -40,19 +53,31 @@ public class alladressesactivity extends AppCompatActivity {
 
         int mode = getIntent().getIntExtra("MODE",-1);
 
-        addresses_adapter addresses_adapter= new addresses_adapter(addresses_modelList,mode);
-        myaddressesRecyclerView.setAdapter(addresses_adapter);
+        deliverHere = findViewById(R.id.deliver_here_button);
+
+        if(mode == SELECT_ADDRESS){
+            deliverHere.setVisibility(View.VISIBLE);
+        }
+        else{
+            deliverHere.setVisibility(View.GONE);
+        }
+
+        Addresses_adapter= new addresses_adapter(addresses_modelList,mode);
+        myaddressesRecyclerView.setAdapter(Addresses_adapter);
 
         ((SimpleItemAnimator)myaddressesRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
-        addresses_adapter.notifyDataSetChanged();
+        Addresses_adapter.notifyDataSetChanged();
 
 
+        // JO KERNA YAAR RAKNA BUS , ISLIYE YE KIYA , pakka chalega kyu ni chalega
+        // mere ko ni samjha
+      //  addresses_adapter_obj = new addresses_adapter(addresses_modelList , mode);
     }
 
 
     public  static void refreshItem(int deSelect,int select){
-        addresses_adapter_obj.notifyItemChanged(deSelect);
-        addresses_adapter_obj.notifyItemChanged(select);
+        Addresses_adapter.notifyItemChanged(deSelect);
+        Addresses_adapter.notifyItemChanged(select);
     }
 
 

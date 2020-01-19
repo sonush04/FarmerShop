@@ -4,6 +4,7 @@ package com.gautam.myshop;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,13 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +40,10 @@ import java.util.TimerTask;
 public class HomeFragment extends Fragment {
 
    private RecyclerView testing;
+   private  List<Category_model> category_modelList;
+   private FirebaseFirestore firebaseFirestore;
+
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -55,23 +67,39 @@ private RecyclerView categoryRecyclerView;
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         categoryRecyclerView.setLayoutManager(linearLayoutManager);
-        List<Category_model> category_modelList=new ArrayList<Category_model>();
-        category_modelList.add(new Category_model("link","Home"));
-        category_modelList.add(new Category_model("link","Electronics"));
-        category_modelList.add(new Category_model("link","Home"));
-        category_modelList.add(new Category_model("link","Home"));
-        category_modelList.add(new Category_model("link","Home"));
-        category_modelList.add(new Category_model("link","Electronics"));
-        category_modelList.add(new Category_model("link","Home"));
-        category_modelList.add(new Category_model("link","Home"));
-        category_modelList.add(new Category_model("link","Home"));
-        category_modelList.add(new Category_model("link","Electronics"));
-        category_modelList.add(new Category_model("link","Home"));
-        category_modelList.add(new Category_model("link","Home"));
+
+        category_modelList=new ArrayList<Category_model>();
 
         category_adapter=new Category_adapter(category_modelList);
         categoryRecyclerView.setAdapter(category_adapter);
-        category_adapter.notifyDataSetChanged();
+
+    //    category_adapter.notifyDataSetChanged();
+
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+        firebaseFirestore.collection("CATEGORIES").orderBy("index").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot documentSnapshot : task.getResult()){
+
+                                category_modelList.add( new Category_model(documentSnapshot.get("icon").toString() , documentSnapshot.get("CategoryName").toString()) );
+
+                            }
+
+                            category_adapter.notifyDataSetChanged();
+                        }
+                        else{
+                            String error = task.getException().getMessage();
+                            Toast.makeText(getContext(),error,Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+
 
 
         ////////////////

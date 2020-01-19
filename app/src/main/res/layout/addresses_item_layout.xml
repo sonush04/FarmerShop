@@ -84,6 +84,7 @@
             android:paddingEnd="16dp"
             android:paddingBottom="6dp"
             android:text="EDIT"
+            android:visibility="gone"
             android:textAlignment="center"
             android:textSize="12sp" />
 
@@ -98,6 +99,7 @@
             android:paddingEnd="16dp"
             android:paddingBottom="6dp"
             android:text="remove"
+            android:visibility="gone"
             android:textAlignment="center"
             android:textSize="12sp" />
     </LinearLayout>

@@ -9,12 +9,17 @@
         android:roundIcon="@drawable/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".deliveryActivity"></activity>
+        <activity android:name=".farmerCategoryActivity"></activity>
+        <activity android:name=".deliveryActivity" />
         <activity
             android:name=".HomeActivity"
             android:label="MY SHOP"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+
+
+
+        </activity>
         <activity android:name=".orderDetailsActivity" />
         <activity android:name=".AdminCategoryActivity" />
         <activity android:name=".ViewAllActivity" />
@@ -41,6 +46,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 

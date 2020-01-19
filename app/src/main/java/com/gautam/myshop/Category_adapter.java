@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -32,6 +35,7 @@ public class Category_adapter extends RecyclerView.Adapter<Category_adapter.View
         String name=category_modelList.get(position).getCategory_name();
        holder.setCategory(name,position);
 
+       holder.setCategoryIcon(icon);
 
     }
 
@@ -50,8 +54,11 @@ private ImageView categoryIcon;
 
 
         }
-        private void setCategoryIcon()
+        private void setCategoryIcon(String iconURL)
         {
+            if( ! iconURL.equals("null")) {
+                Glide.with(itemView.getContext()).load(iconURL).apply(new RequestOptions().placeholder(R.drawable.home)).into(categoryIcon);
+            }
 
         }
         private void setCategory(final String name, final int position)

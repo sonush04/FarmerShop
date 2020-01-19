@@ -40,14 +40,20 @@ public class addresses_adapter extends RecyclerView.Adapter<addresses_adapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull addresses_adapter.Viewholder holder, int position) {
+
         String name=addresses_modelList.get(position).getFullname();
         String addresses=addresses_modelList.get(position).getAddresses();
-        String pincode=addresses_modelList.get(position).getPincode();
-        Boolean selected =addresses_modelList.get(position).getSelected();
+        String pincode= addresses_modelList.get(position).getPincode();
+        Boolean selected = addresses_modelList.get(position).getSelected();
+
         holder.setdata(name,addresses,pincode,selected,position);
 
 
     }
+
+
+    // kya gift dena chahiye
+    
 
     @Override
     public int getItemCount() {
@@ -61,6 +67,8 @@ public class addresses_adapter extends RecyclerView.Adapter<addresses_adapter.Vi
         private ImageView icon;
 
 
+    // YAAR YE else if JAAN LEKE RAHEGA
+        // AAJ KI PARTY ANOOP KI taraf se BREAD PAKODA
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
@@ -69,40 +77,48 @@ public class addresses_adapter extends RecyclerView.Adapter<addresses_adapter.Vi
             pincode = itemView.findViewById(R.id.pincode);
             icon=itemView.findViewById(R.id.icon_view);
         }
-        private void setdata(String username,String useraddress,String userpincode,Boolean selected , int position)
+        private void setdata(String username,String useraddress,String userpincode , Boolean selected , int position)
         {
             fullname.setText(username);
             addresses.setText(useraddress);
             pincode.setText(userpincode);
 
-            if(MODE == SELECT_ADDRESS){
+            if(MODE == SELECT_ADDRESS){ // AADHI BINDI ban gayi AADHI BINDI haha ha ha
+
                 icon.setImageResource(R.drawable.tick);
-                if(selected)
-                {
-                    icon.setVisibility(View.VISIBLE);
-                    preSelectedPosition = position;
-                }
-                else
-                {
-                    icon.setVisibility(View.GONE);
-                }
+                            if(selected)
+                            {
+                                icon.setVisibility(View.VISIBLE);
+                                preSelectedPosition = position;
+                            }
+                            else
+                            {
+                                icon.setVisibility(View.GONE);
 
-            }else  if(MODE == MANAGE_ADDRESS){
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                            }
+
+                            itemView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
 
 
-                        if(preSelectedPosition != position) {
-                            addresses_modelList.get(position).setSelected(true);
-                            addresses_modelList.get(preSelectedPosition).setSelected(false);
-                            refreshItem(preSelectedPosition, position);
-                            preSelectedPosition = position;
+                                    if(preSelectedPosition != position) {
 
-                        }
+                                        addresses_modelList.get(position).setSelected(true);
+                                        addresses_modelList.get(preSelectedPosition).setSelected(false);
 
-                    }
-                });
+                                        refreshItem(preSelectedPosition, position);
+
+                                        preSelectedPosition = position;
+
+                                    }
+
+                                }
+                            });
+
+            }else  if(MODE == MANAGE_ADDRESS){  // KHADI BINDI
+
+
             }
 
         }
