@@ -43,9 +43,9 @@ public class CategoryActivity extends AppCompatActivity {
 
 
 
-        sliderModelList.add(new slider_model(R.drawable.my_rewards,"#077AE4"));
-        sliderModelList.add(new slider_model(R.drawable.search,"#077AE4"));
-        sliderModelList.add(new slider_model(R.drawable.app_icon,"#077AE4"));
+        sliderModelList.add(new slider_model(R.drawable.mango,"#077AE4"));
+        sliderModelList.add(new slider_model(R.drawable.pineapple,"#077AE4"));
+        sliderModelList.add(new slider_model(R.drawable.peas,"#077AE4"));
 
 
 
@@ -53,11 +53,11 @@ public class CategoryActivity extends AppCompatActivity {
 
 
 
-        sliderModelList.add(new slider_model(R.drawable.banner,"#077AE4"));
-        sliderModelList.add(new slider_model(R.drawable.profile,"#077AE4"));
+        sliderModelList.add(new slider_model(R.drawable.carrot,"#077AE4"));
+        sliderModelList.add(new slider_model(R.drawable.redchillies,"#077AE4"));
         sliderModelList.add(new slider_model(R.drawable.my_order,"#077AE4"));
-        sliderModelList.add(new slider_model(R.drawable.my_wishlist,"#077AE4"));
-        sliderModelList.add(new slider_model(R.drawable.my_rewards,"#077AE4"));
+        sliderModelList.add(new slider_model(R.drawable.potato,"#077AE4"));
+        sliderModelList.add(new slider_model(R.drawable.tomato,"#077AE4"));
 
 
 
@@ -65,9 +65,9 @@ public class CategoryActivity extends AppCompatActivity {
 
 
 
-        sliderModelList.add(new slider_model(R.drawable.search,"#077AE4"));
-        sliderModelList.add(new slider_model(R.drawable.app_icon,"#077AE4"));
-        sliderModelList.add(new slider_model(R.drawable.profile,"#077AE4"));
+        sliderModelList.add(new slider_model(R.drawable.brinjal,"#077AE4"));
+        sliderModelList.add(new slider_model(R.drawable.almond,"#077AE4"));
+        sliderModelList.add(new slider_model(R.drawable.watermelon,"#077AE4"));
 
 
         ////////////
@@ -115,16 +115,16 @@ public class CategoryActivity extends AppCompatActivity {
 
 
         List<horizontal_product_scroll_model> horizontalProductScrollModelList=new ArrayList<>();
-        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.shopping,"Iphone 11 ","Triple camera","Rs 100000"));
-        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.shopping,"Iphone 11 ","Triple camera","Rs 100000"));
-        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.profile,"Iphone 11 ","Triple camera","Rs 100000"));
-        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.my_rewards,"Iphone 11 ","Triple camera","Rs 100000"));
-        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.app_icon,"Iphone 11 ","Triple camera","Rs 100000"));
-        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.shopping,"Iphone 11 ","Triple camera","Rs 100000"));
-        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.my_wishlist,"Iphone 11 ","Triple camera","Rs 100000"));
-        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.shopping,"Iphone 11 ","Triple camera","Rs 100000"));
-        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.my_wishlist,"Iphone 11 ","Triple camera","Rs 100000"));
-        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.shopping,"Iphone 11 ","Triple camera","Rs 100000"));
+        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.mango,"mango ","Ratnagiri","Rs 100/kg"));
+        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.apple,"kasmiri ","fresh","Rs 200/kg"));
+        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.brinjal,"Brinjal ","fresh","Rs 35/kg"));
+        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.potato,"potato ","fresh","Rs 20/kg"));
+        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.tomato,"tomato ","fresh","Rs 30/kg"));
+        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.watermelon,"watermelon ","fresh","Rs 45/kg"));
+        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.redchillies,"chilli ","spicy","Rs 55/kg"));
+        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.pineapple,"pineapple","fresh","Rs 130/kg"));
+        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.peas,"Peas ","fresh & healthy","Rs 150/kg"));
+        horizontalProductScrollModelList.add(new horizontal_product_scroll_model(R.drawable.almond,"Almond ","afgani","Rs 1000/kg"));
 
 
 

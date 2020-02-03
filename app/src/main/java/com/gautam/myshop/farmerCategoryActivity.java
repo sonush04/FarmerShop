@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,22 +23,22 @@ import android.widget.Toolbar;
 
 
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 
-import com.google.android.gms.tasks.Continuation;
+
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
+
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -49,6 +50,17 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+
+import java.util.HashMap;
+
+
+
+
+
+
+
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -63,9 +75,23 @@ public class farmerCategoryActivity extends AppCompatActivity {
     private Button UpdatePostButton;
     private EditText PostDescription;
 
+
+
+
+
+
+    private String filePath1;
+
+
+
+
+
+
     private static final int Gallery_Pick = 1;
     private Uri ImageUri;
     private String Description;
+
+    private StorageReference storageReference;
 
     private StorageReference PostsImagesRefrence;
     private DatabaseReference UsersRef, PostsRef;
@@ -84,7 +110,7 @@ public class farmerCategoryActivity extends AppCompatActivity {
 
         PostsImagesRefrence = FirebaseStorage.getInstance().getReference();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Admins");
-        PostsRef = FirebaseDatabase.getInstance().getReference().child("Admins");
+        PostsRef = FirebaseDatabase.getInstance().getReference().child("CATEGORIES");
 //        UsersRef = FirebaseDatabase.getInstance().getReference().child(current_user_id);
 
         SelectPostImage =  findViewById(R.id.categoryImage);
@@ -146,24 +172,32 @@ public class farmerCategoryActivity extends AppCompatActivity {
 
         postRandomName = saveCurrentDate + saveCurrentTime;
 
-
-        StorageReference filePath = PostsImagesRefrence.child("Post Images").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
+        StorageReference  filePath = PostsImagesRefrence.child("Post Images").child(ImageUri.getLastPathSegment() + postRandomName + ".jpg");
 
         filePath.putFile(ImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                if (task.isSuccessful()) {
-                   // Toast.makeText(farmerCategoryActivity.this, "image uploaded successfully to Storage...", Toast.LENGTH_SHORT).show();
 
-                    downloadUrl = task.getResult().getStorage().getDownloadUrl().toString();
-                   Toast.makeText(farmerCategoryActivity.this, "image uploaded successfully to Storage...", Toast.LENGTH_SHORT).show();
+
+                filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+
+
+
+
+                        PostsRef.child(Description).child("profileimage").setValue(uri.toString());
+                        Toast.makeText(farmerCategoryActivity.this, "icon image...", Toast.LENGTH_SHORT).show();
+
+
+                        filePath1 = uri.toString();
+                    }
+                });
+
 
                     SavingPostInformationToDatabase();
 
-                } else {
-                    String message = task.getException().getMessage();
-                    Toast.makeText(farmerCategoryActivity.this, "Error occured: " + message, Toast.LENGTH_SHORT).show();
-                }
+
             }
         });
     }
@@ -172,15 +206,29 @@ public class farmerCategoryActivity extends AppCompatActivity {
     private void SavingPostInformationToDatabase() {
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         HashMap postsMap = new HashMap();
         //postsMap.put("uid", current_user_id);
         postsMap.put("date", saveCurrentDate);
         postsMap.put("time", saveCurrentTime);
         postsMap.put("title", Description);
-        // postsMap.put("profileimage", userProfileImage);
+        //postsMap.put("profileimage", filePath1);
         // postsMap.put("fullname", userFullName);
         //postsMap.put("title", );
-        PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
+        PostsRef.child(Description).updateChildren(postsMap)
                 .addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {

@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/shopping" />
+        app:srcCompat="@drawable/mango" />
 
     <TextView
         android:id="@+id/hs_product_title"
@@ -30,7 +30,7 @@
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textColor="@android:color/black"
-        android:text="Iphone 11"
+        android:text="Fruits"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hs_product_image" />
@@ -43,7 +43,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
-        android:text="Tripple Camera"
+        android:text="Fresh"
         android:textSize="10sp"
         android:textAlignment="center"
         android:textColor="@android:color/holo_green_light"
@@ -59,7 +59,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
-        android:text="Rs 1000000"
+        android:text="Rs 100"
         android:textSize="12sp"
 
         android:textAlignment="center"
